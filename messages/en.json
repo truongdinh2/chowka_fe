@@ -1,0 +1,17 @@
+{
+  "Index": {
+    "title": "Hello world!!",
+    "subtitle": "How is it going?",
+    "alertMessage": "Something went wrong!"
+  },
+  "Layout":{
+    "create-design": "Create design",
+    "trend": "Trending",
+    "sale-game":"Voucher game",
+    "blog":"blog"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, vi {Việt Nam} en {English} other {Unknown}}"
+  }
+}

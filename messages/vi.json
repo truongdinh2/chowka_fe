@@ -1,0 +1,17 @@
+{
+  "Index": {
+    "title": "xin chào",
+    "subtitle": "Kuis menee?",
+    "alertMessage": "Jotaki meni ny pielee!"
+  },
+  "Layout":{
+    "create-design": "Tạo thiết kế",
+    "trend": "Xu hướng",
+    "sale-game":"Game giảm giá",
+    "blog":"blog"
+  },
+  "LocaleSwitcher": {
+    "label": "Thay Dổi Ngôn ngữ",
+    "locale": "{locale, select, vi {Việt Nam} en {Tiếng Anh} other {Unknown}}"
+  }
+}

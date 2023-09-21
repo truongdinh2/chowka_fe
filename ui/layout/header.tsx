@@ -1,4 +1,22 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
+import Logo from '@/public/icons/logo.png';
+// import { useTranslation } from 'react-i18next';
+// import { useTranslation } from '@/app/i18n/client';
+// import { useTranslation } from '@/app/i18n/client';
+import { useFormatter, useTranslations } from 'next-intl';
+
+import AppImage from '../common/image';
+import { AppLink } from '../common/link';
+import LocaleSwitcher from '../lang-switch';
+
 const AppHeader = () => {
+	const route = useRouter();
+	const t = useTranslations('Layout');
+	// console.log("i18n", i18n);
+
 	return (
 		<nav className="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
 			<div className="flex w-full flex-wrap items-center justify-between px-3">
@@ -27,49 +45,33 @@ const AppHeader = () => {
 					id="navbarSupportedContent1"
 					data-te-collapse-item
 				>
-					<a
-						className="mb-4 ml-2 mr-5 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
-						href="#"
-					>
-						<img
-							src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
-							style={{height: "15px"}}
-							alt="TE Logo"
-							loading="lazy"
-						/>
-					</a>
+					<AppImage src={Logo} alt="logo" className="h-6 w-6" onClick={() => route.push(`/`)} />
 					<ul className="list-style-none mr-auto flex flex-col pl-0 lg:flex-row" data-te-navbar-nav-ref>
 						<li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-							<a
-								className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-								href="#"
-								data-te-nav-link-ref
-							>
-								Dashboard
-							</a>
+							<AppLink variant="title" href="/create-design" className="ml-3">
+								{t('create-design')}
+							</AppLink>
 						</li>
 						<li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-							<a
-								className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-								href="#"
-								data-te-nav-link-ref
-							>
-								Team
-							</a>
+							<AppLink variant="title" href="/trend" className="ml-3">
+								{t('trend')}
+							</AppLink>
 						</li>
 						<li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-							<a
-								className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-								href="#"
-								data-te-nav-link-ref
-							>
-								Projects
-							</a>
+							<AppLink variant="title" href="/sale-game" className="ml-3">
+								{t('sale-game')}
+							</AppLink>
+						</li>
+						<li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+							<AppLink variant="title" href="/blog" className="ml-3">
+								{t('blog')}
+							</AppLink>
 						</li>
 					</ul>
 				</div>
 
 				<div className="relative flex items-center">
+					<LocaleSwitcher/>
 					<a
 						className="mr-4 text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
 						href="#"
@@ -150,7 +152,7 @@ const AppHeader = () => {
 							<img
 								src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
 								className="rounded-full"
-								style={{height: "25px", width: "25px"}}
+								style={{ height: '25px', width: '25px' }}
 								alt=""
 								loading="lazy"
 							/>

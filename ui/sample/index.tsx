@@ -1,19 +1,22 @@
-'use client';
+"use client"
+import { useRouter } from 'next/navigation';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/storeH';
-import { increment } from '@/state/store/counterSlice';
 import { Button } from '@/ui/common/button';
 
-import { DatePickerProvider } from '../context/datepicker-provider';
+import { AppLink } from '../common/link';
 import { useLoading } from '../context/loading-provider';
 import InfoCard from './info-card';
+import { increment } from '@/state/store/counterSlice';
+import NavigationLink from '../ui-check';
 
 function Sample() {
 	const counter = useAppSelector((state) => state.counter.value);
 	const dispatch = useAppDispatch();
 	const { setLoading } = useLoading();
+
 	return (
-		<div className="h-screen flex p-3">
+		<div className="h-screen flex gap-2 p-3">
 			<div className="flex-1">
 				<InfoCard title="Button">
 					<div className="flex gap-x-1">
@@ -60,9 +63,16 @@ function Sample() {
 					</div>
 				</InfoCard>
 			</div>
-			<div className="flex-1 flex ">
-				<h1 className="text-white text-2xl">Phần bên phải</h1>
-				<div></div>
+			<div className="flex-1">
+				<InfoCard title="Link">
+					<AppLink href="/#">Link</AppLink>
+					<AppLink href="/#" variant={'title'}>
+						Title
+					</AppLink>
+					<NavigationLink href='/trend'>
+							trend
+					</NavigationLink>
+				</InfoCard>
 			</div>
 		</div>
 	);

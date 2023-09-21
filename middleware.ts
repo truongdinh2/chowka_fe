@@ -1,38 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import acceptLanguage from 'accept-language';
+import createIntlMiddleware from 'next-intl/middleware';
+import { locales } from './lib/locales';
 
-import { fallbackLng, languages } from './app/i18n/settings';
-
-acceptLanguage.languages(languages);
-
+acceptLanguage.languages(locales);
+const intlMiddleware = createIntlMiddleware({
+	locales,
+	defaultLocale: 'vi',
+});
 export const config = {
-	matcher: '/:lng*',
+	// Skip all paths that should not be internationalized
+	matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
-
 const cookieName = 'i18next';
 let isFirstGoWeb = true;
 export function middleware(req: NextRequest, res: NextResponse) {
 	let lng;
 	if (req.cookies.has(cookieName)) lng = acceptLanguage.get(req.cookies.get(cookieName)?.value);
 	if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'));
-	if (!lng) lng = fallbackLng;
-
-	if (req.nextUrl.pathname === `/${lng}` || req.nextUrl.pathname === '/') {
-		if (isFirstGoWeb) {
-			isFirstGoWeb = false;
-			return NextResponse.redirect(new URL(`/${lng}/sample`, req.url));
-		}
-		return NextResponse.redirect(new URL(`/${lng}`, req.url));
+	if (!lng) {
+		lng = 'vi';
+		res.cookies.set(cookieName, lng);
 	}
+	if ([lng, '/'].includes(req.nextUrl.pathname) && isFirstGoWeb) {
+		isFirstGoWeb = false;
+		let url = lng !== 'vi' ? `/${lng}/sample` : `/vi/sample`;
+		return NextResponse.redirect(new URL(url, req.url));
 
-	if (req.headers.has('referer')) {
-		const refererUrl = new URL(req.headers.get('referer') || '');
-		const lngInReferer = languages.find((l: string) => refererUrl.pathname.startsWith(`/${l}`));
-		const response = NextResponse.next();
-		if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
-		return response;
 	}
-
-	return NextResponse.next();
+	return intlMiddleware(req);
 }
