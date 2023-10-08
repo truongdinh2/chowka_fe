@@ -10,7 +10,7 @@ import Link from 'next-intl/link';
 
 type LinkProps = React.ComponentProps<typeof Link>;
 
-const linkVariants = cva('px-2 transition duration-150 ease-in-out hover:text-sky-700  active:text-rose-500', {
+const linkVariants = cva(' transition duration-150 ease-in-out hover:text-sky-700  active:text-rose-500', {
 	variants: {
 		variant: {
 			default: 'underline decoration-transparent text-sky-700 focus:text-violet-600 hover:decoration-inherit',

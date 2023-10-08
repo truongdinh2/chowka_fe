@@ -14,4 +14,11 @@
     "label": "Change language",
     "locale": "{locale, select, vi {Việt Nam} en {English} other {Unknown}}"
   }
+  ,
+  "Home":{
+    "create-design": "Create design",
+    "trend": "Trending",
+    "sale-game":"Voucher game",
+    "blog":"blog"
+  }
 }

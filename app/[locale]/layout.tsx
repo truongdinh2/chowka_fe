@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import NextTopLoader from 'nextjs-toploader';
 
 import { ReactNode } from 'react';
 
@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { NextIntlClientProvider, createTranslator } from 'next-intl';
 
 import './../globals.css';
+import { locales } from '@/lib/locales';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -40,7 +41,7 @@ async function getMessages(locale: string) {
 }
 
 export async function generateStaticParams() {
-	return ['en', 'vi'].map((locale) => ({ locale }));
+	return locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params: { locale } }: Props) {
@@ -63,10 +64,13 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 		<html className="h-full" lang={locale}>
 			<body className={clsx(inter.className, 'flex h-full flex-col')}>
 				<NextIntlClientProvider locale={locale} messages={messages}>
+				<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
 					<LoadingProvider>
 						<Providers>
 							<AppHeader />
+							<div className='h'>
 							{children}
+							</div>
 							<AppFooter />
 						</Providers>
 					</LoadingProvider>

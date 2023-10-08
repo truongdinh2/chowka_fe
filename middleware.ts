@@ -13,21 +13,20 @@ export const config = {
 	// Skip all paths that should not be internationalized
 	matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
-const cookieName = 'i18next';
-let isFirstGoWeb = true;
+const langName = 'i18next';
+const isFirstGoWeb = "true";
 export function middleware(req: NextRequest, res: NextResponse) {
 	let lng;
-	if (req.cookies.has(cookieName)) lng = acceptLanguage.get(req.cookies.get(cookieName)?.value);
+	if (req.cookies.has(langName)) lng = acceptLanguage.get(req.cookies.get(langName)?.value);
 	if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'));
 	if (!lng) {
 		lng = 'vi';
-		res.cookies.set(cookieName, lng);
+		res.cookies.set(langName, lng);
 	}
-	if ([lng, '/'].includes(req.nextUrl.pathname) && isFirstGoWeb) {
-		isFirstGoWeb = false;
+	if ([lng, '/'].includes(req.nextUrl.pathname) && !!req.cookies.has(isFirstGoWeb)) {
+		res.cookies.set(isFirstGoWeb, "false");
 		let url = lng !== 'vi' ? `/${lng}/sample` : `/vi/sample`;
 		return NextResponse.redirect(new URL(url, req.url));
-
 	}
 	return intlMiddleware(req);
 }

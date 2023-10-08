@@ -144,6 +144,9 @@ const config: Config = {
 				'tremor-default': '0.5rem',
 				'tremor-full': '9999px',
 			},
+			height:{
+				input: "27px"
+			},
 			// fontSize: {
 			// 	'tremor-label': ['0.75rem'],
 			// 	'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
