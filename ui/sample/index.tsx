@@ -1,11 +1,15 @@
 'use client';
 
+import Image from 'next/image';
+
 import { useAppDispatch, useAppSelector } from '@/hooks/storeH';
 import logger from '@/lib/logger';
+import AoModel from '@/public/imgs/ao-model.png';
 import { increment } from '@/state/store/counterSlice';
-import { Button } from '@/ui/common/button';
+import { AppButton } from '@/ui/common/button';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import AppImage from '../common/image';
 import { AppLink } from '../common/link';
 import Notification from '../common/notifications';
 import { useLoading } from '../context/loading-provider';
@@ -33,48 +37,48 @@ function Sample() {
 			<form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-3">
 				<div className="flex gap-2 p-3">
 					<div className="flex-1">
-						<InfoCard title="Button">
+						<InfoCard title="AppButton">
 							<div className="flex gap-x-1">
-								<Button variant={'default'} size={'lg'} type="submit">
+								<AppButton variant={'default'} size={'lg'} type="submit">
 									default
-								</Button>
-								<Button variant={'destructive'} size={'lg'}>
+								</AppButton>
+								<AppButton variant={'destructive'} size={'lg'}>
 									destructive
-								</Button>
-								<Button variant={'secondary'} size={'lg'}>
+								</AppButton>
+								<AppButton variant={'secondary'} size={'lg'}>
 									secondary
-								</Button>
-								<Button variant={'warning'} size={'lg'}>
+								</AppButton>
+								<AppButton variant={'warning'} size={'lg'}>
 									warning
-								</Button>
-								<Button variant={'link'} size={'lg'}>
+								</AppButton>
+								<AppButton variant={'link'} size={'lg'}>
 									link
-								</Button>
-								<Button variant={'success'}>success</Button>
+								</AppButton>
+								<AppButton variant={'success'}>success</AppButton>
 							</div>
 						</InfoCard>
 						<InfoCard title="Redux-toolkit">
 							<div className="flex gap-x-2">
-								<Button variant={'default'} onClick={() => dispatch(increment())}>
+								<AppButton variant={'default'} onClick={() => dispatch(increment())}>
 									increment
-								</Button>
+								</AppButton>
 								<div>{counter}</div>
-								<Button
+								<AppButton
 									variant={'secondary'}
 									onClick={() => {
 										setLoading(true);
 									}}
 								>
 									setLoadingT
-								</Button>
-								<Button
+								</AppButton>
+								<AppButton
 									variant={'secondary'}
 									onClick={() => {
 										setLoading(false);
 									}}
 								>
 									setLoadingF
-								</Button>
+								</AppButton>
 							</div>
 						</InfoCard>
 						<InfoCard title="Notification" className="flex-wrap">
@@ -105,6 +109,17 @@ function Sample() {
 							</div>
 							<div className="w-full">
 								<AppSelect options={['opt 1', 'opt 2']} name="mul" helperText="d" id="4" />
+							</div>
+						</InfoCard>
+						<InfoCard title="IMG">
+							<div className="w-40 h-60" style={{ border: '1px solid' }}>
+								<AppImage src={AoModel} alt="ui/ux review check" />
+							</div>
+							<div className="w-60 h-60" style={{ border: '1px solid' }}>
+								<img src={'/imgs/ao-model.png'} alt="ui/ux review check" />
+							</div>
+							<div className="w-60 h-60" style={{ border: '1px solid' }}>
+								<Image src={AoModel} alt="Mô tả ảnh" />
 							</div>
 						</InfoCard>
 					</div>

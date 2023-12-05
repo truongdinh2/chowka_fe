@@ -5,7 +5,7 @@ import { DateRange } from 'react-day-picker';
 import { useDate } from './context/datepicker-provider';
 import { cn } from '@/utils/tail-merge';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
-import { Button } from './common/button';
+import { AppButton } from './common/button';
 import { Calendar } from './common/calendar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select';
 
@@ -25,7 +25,7 @@ function DatePickerWithRange({ className, date, onChange }: { className?: string
 		<div className={cn('grid gap-2', className)}>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button
+					<AppButton
 						id="date"
 						variant={'secondary'}
 						className={cn(
@@ -45,7 +45,7 @@ function DatePickerWithRange({ className, date, onChange }: { className?: string
 						) : (
 							<span>Pick a date</span>
 						)}
-					</Button>
+					</AppButton>
 				</PopoverTrigger>
 				<PopoverContent className="w-auto p-0" align="start">
 					<Calendar

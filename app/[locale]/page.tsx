@@ -1,10 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { Home } from '@/ui/home';
 
 export default function Index() {
-	const t = useTranslations('Index');
-	return <div>
-		<div></div>
-	</div>;
+	return (
+		<div>
+			<div>
+				<Home />
+			</div>
+		</div>
+	);
 }
