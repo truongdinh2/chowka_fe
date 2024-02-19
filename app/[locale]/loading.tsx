@@ -1,5 +1,5 @@
 export default function Loading() {
   return(
-    <div>Loading</div>
+    <div className="m-auto text-center">Loading</div>
     )
 }

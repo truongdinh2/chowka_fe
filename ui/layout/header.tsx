@@ -8,7 +8,6 @@ import Logo from '@/public/icons/logo.png';
 // import { useTranslation } from '@/app/i18n/client';
 import { useFormatter, useTranslations } from 'next-intl';
 
-import { Badge } from '../common/badge';
 import AppImage from '../common/image';
 import { AppLink } from '../common/link';
 import Notification from '../common/notifications';

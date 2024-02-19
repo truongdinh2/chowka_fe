@@ -1,18 +1,19 @@
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import NextTopLoader from 'nextjs-toploader';
 
 import { ReactNode } from 'react';
 
+import { locales } from '@/lib/locales';
 import { Providers } from '@/state/store/providers';
 import { LoadingProvider } from '@/ui/context/loading-provider';
 import AppFooter from '@/ui/layout/footer';
 import AppHeader from '@/ui/layout/header';
+import { Social } from '@/ui/layout/social';
 import clsx from 'clsx';
 import { NextIntlClientProvider, createTranslator } from 'next-intl';
+import NextTopLoader from 'nextjs-toploader';
 
 import './../globals.css';
-import { locales } from '@/lib/locales';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -53,7 +54,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
 	const t = createTranslator({ locale, messages });
 
 	return {
-		title: t('title'),
+		title: 'chowShop',
 	};
 }
 
@@ -64,12 +65,13 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 		<html className="h-full" lang={locale}>
 			<body className={clsx(inter.className, 'flex h-full flex-col')}>
 				<NextIntlClientProvider locale={locale} messages={messages}>
-				<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
+					<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
 					<LoadingProvider>
 						<Providers>
 							<AppHeader />
-							<div className='h'>
-							{children}
+							<div className="h">{children}</div>
+							<div className='m-auto mt-10 mb-5'>
+								<Social />
 							</div>
 							<AppFooter />
 						</Providers>
