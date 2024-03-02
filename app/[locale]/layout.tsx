@@ -33,50 +33,50 @@ type Props = {
 	params: { locale: string };
 };
 
-async function getMessages(locale: string) {
-	try {
-		return (await import(`@/messages/${locale}.json`)).default;
-	} catch (error) {
-		notFound();
-	}
-}
+// async function getMessages(locale: string) {
+// 	try {
+// 		return (await import(`@/messages/${locale}.json`)).default;
+// 	} catch (error) {
+// 		notFound();
+// 	}
+// }
 
-export async function generateStaticParams() {
-	return locales.map((locale) => ({ locale }));
-}
+// export async function generateStaticParams() {
+// 	return locales.map((locale) => ({ locale }));
+// }
 
-export async function generateMetadata({ params: { locale } }: Props) {
-	const messages = await getMessages(locale);
+// export async function generateMetadata({ params: { locale } }: Props) {
+// 	const messages = await getMessages(locale);
 
-	// You can use the core (non-React) APIs when you have to use next-intl
-	// outside of components. Potentially this will be simplified in the future
-	// (see https://next-intl-docs.vercel.app/docs/next-13/server-components).
-	const t = createTranslator({ locale, messages });
+// 	// You can use the core (non-React) APIs when you have to use next-intl
+// 	// outside of components. Potentially this will be simplified in the future
+// 	// (see https://next-intl-docs.vercel.app/docs/next-13/server-components).
+// 	const t = createTranslator({ locale, messages });
 
-	return {
-		title: 'chowShop',
-	};
-}
+// 	return {
+// 		title: 'chowShop',
+// 	};
+// }
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {
-	const messages = await getMessages(locale);
+	// const messages = await getMessages(locale);
 
 	return (
 		<html className="h-full" lang={locale}>
 			<body className={clsx(inter.className, 'flex h-full flex-col')}>
-				<NextIntlClientProvider locale={locale} messages={messages}>
-					<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
-					<LoadingProvider>
-						<Providers>
-							<AppHeader />
-							<div className="h">{children}</div>
-							<div className='m-auto mt-10 mb-5'>
-								<Social />
-							</div>
-							<AppFooter />
-						</Providers>
-					</LoadingProvider>
-				</NextIntlClientProvider>
+				{/* <NextIntlClientProvider locale={locale} messages={messages}> */}
+				<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
+				<LoadingProvider>
+					<Providers>
+						<AppHeader />
+						<div className="h">{children}</div>
+						<div className="m-auto mt-10 mb-5">
+							<Social />
+						</div>
+						<AppFooter />
+					</Providers>
+				</LoadingProvider>
+				{/* </NextIntlClientProvider> */}
 			</body>
 		</html>
 	);
