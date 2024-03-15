@@ -3,8 +3,8 @@
 import { useTransition } from 'react';
 
 import { locales } from '@/lib/locales';
+import { usePathname, useRouter } from '@/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next-intl/client';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import AppSelect, { Option } from './select/app-select';
@@ -29,11 +29,17 @@ export default function LocaleSwitcher() {
 	});
 	const optionCustom = locales.map((item) => ({ value: item, label: t('locale', { locale: item }) }));
 	const { handleSubmit } = methods;
-	
+
 	return (
 		<FormProvider key={'hi'} {...methods}>
 			<form onSubmit={handleSubmit(() => {})} className=" min-w-fit space-y-3 px-2">
-				<AppSelect name="locale" options={optionCustom} onChangeInput={onSelectChange} placeholder={''} isSearchable={false} />
+				<AppSelect
+					name="locale"
+					options={optionCustom}
+					onChangeInput={onSelectChange}
+					placeholder={''}
+					isSearchable={false}
+				/>
 			</form>
 		</FormProvider>
 		// <label

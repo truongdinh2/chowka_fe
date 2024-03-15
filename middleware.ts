@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import acceptLanguage from 'accept-language';
-import createIntlMiddleware from 'next-intl/middleware';
+import createMiddleware from 'next-intl/middleware';
+
 import { locales } from './lib/locales';
 
 acceptLanguage.languages(locales);
-const intlMiddleware = createIntlMiddleware({
+const intlMiddleware = createMiddleware({
 	locales,
 	defaultLocale: 'vi',
 });
@@ -14,7 +15,7 @@ export const config = {
 	matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
 const langName = 'i18next';
-const isFirstGoWeb = "true";
+const isFirstGoWeb = 'true';
 export function middleware(req: NextRequest, res: NextResponse) {
 	let lng;
 	if (req.cookies.has(langName)) lng = acceptLanguage.get(req.cookies.get(langName)?.value);
@@ -24,7 +25,7 @@ export function middleware(req: NextRequest, res: NextResponse) {
 		res.cookies.set(langName, lng);
 	}
 	if ([lng, '/'].includes(req.nextUrl.pathname) && !!req.cookies.has(isFirstGoWeb)) {
-		res.cookies.set(isFirstGoWeb, "false");
+		res.cookies.set(isFirstGoWeb, 'false');
 		let url = lng !== 'vi' ? `/${lng}/sample` : `/vi/sample`;
 		return NextResponse.redirect(new URL(url, req.url));
 	}

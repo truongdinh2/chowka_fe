@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
 
 import AoModel from '@/public/imgs/ao-model.png';
@@ -13,7 +15,6 @@ import {
 	Tooltip,
 	Typography,
 } from '@material-tailwind/react';
-import { useRouter } from 'next-intl/client';
 import { BsFillHeartFill } from 'react-icons/bs';
 import { FaUserSecret } from 'react-icons/fa6';
 import { RiHeart3Line } from 'react-icons/ri';

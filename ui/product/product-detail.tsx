@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 
+import { useRouter } from '@/navigation';
 import AoModel from '@/public/imgs/ao-model.png';
 import { Button } from '@material-tailwind/react';
-import { useRouter } from 'next-intl/client';
 import { FaMinus } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa';
 
@@ -43,7 +43,7 @@ export const ProductDetail = (props: Props) => {
 					</span>
 				</div> */}
 				<AppImage src={AoModel} alt="ao mau" className="w-[420px] border rounded-xl flex items-center flex-1" />
-				<div className='w-full mt-8'>
+				<div className="w-full mt-8">
 					<span className="w-fit whitespace-nowrap select-none bg-gray-900/10 text-gray-900 text-xs rounded-lg flex items-center justify-center h-6 px-2">
 						da ban 13c
 					</span>

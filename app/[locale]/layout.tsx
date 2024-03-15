@@ -10,7 +10,7 @@ import AppFooter from '@/ui/layout/footer';
 import AppHeader from '@/ui/layout/header';
 import { Social } from '@/ui/layout/social';
 import clsx from 'clsx';
-import { NextIntlClientProvider, createTranslator } from 'next-intl';
+import { NextIntlClientProvider, createTranslator, useMessages } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
 
 import './../globals.css';
@@ -33,13 +33,13 @@ type Props = {
 	params: { locale: string };
 };
 
-// async function getMessages(locale: string) {
-// 	try {
-// 		return (await import(`@/messages/${locale}.json`)).default;
-// 	} catch (error) {
-// 		notFound();
-// 	}
-// }
+async function getMessages(locale: string) {
+	try {
+		return (await import(`@/messages/${locale}.json`)).default;
+	} catch (error) {
+		notFound();
+	}
+}
 
 // export async function generateStaticParams() {
 // 	return locales.map((locale) => ({ locale }));
@@ -59,24 +59,23 @@ type Props = {
 // }
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {
-	// const messages = await getMessages(locale);
-
+	const messages = await getMessages(locale);
 	return (
 		<html className="h-full" lang={locale}>
 			<body className={clsx(inter.className, 'flex h-full flex-col')}>
-				{/* <NextIntlClientProvider locale={locale} messages={messages}> */}
-				<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
-				<LoadingProvider>
-					<Providers>
-						<AppHeader />
-						<div className="h">{children}</div>
-						<div className="m-auto mt-10 mb-5">
-							<Social />
-						</div>
-						<AppFooter />
-					</Providers>
-				</LoadingProvider>
-				{/* </NextIntlClientProvider> */}
+				<NextIntlClientProvider messages={messages}>
+					<NextTopLoader color="#0076ff" height={2} showSpinner={false} />
+					<LoadingProvider>
+						<Providers>
+							<AppHeader />
+							<div className="h">{children}</div>
+							<div className="m-auto mt-10 mb-5">
+								<Social />
+							</div>
+							<AppFooter />
+						</Providers>
+					</LoadingProvider>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);
